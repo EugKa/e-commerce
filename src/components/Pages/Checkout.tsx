@@ -4,6 +4,7 @@ import { AppState } from "../../store";
 import { selectCartItems, selectCartTotal } from "../../store/cart/selectors";
 import { ProductCollection } from "../../types";
 import { CheckoutItem } from "../checkout-item";
+import { StripeCheckoutButton } from "../stripe-button";
 import styles from "./Checkout.module.scss";
 interface CheckoutProps {
     cartItems: ProductCollection
@@ -30,8 +31,14 @@ const Checkout = ({cartItems, total}:CheckoutProps) => (
     </div>
     {cartItems.map(cartItem => <CheckoutItem key={cartItem.id} cartItem={cartItem}/>)}
     <div className={styles.total}>
-        <span>TOTAL: ${total}</span>
+      TOTAL: ${total}
     </div>
+    <div className={styles.TestWarning}>
+      *Please use the following test credit card for payments*
+      <br/>
+      4242 4242 4242 4242 - Epx: 01/22 - CW: 123 
+    </div>
+    <StripeCheckoutButton price={total}/>
   </div>
 );
 

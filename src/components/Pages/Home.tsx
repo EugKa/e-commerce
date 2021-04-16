@@ -28,7 +28,6 @@ class HomePage extends React.Component<HomePageProps> {
     }
     
     render() {
-        console.log(`categories`, this.props.categories) 
         return (
             <div className={styles.root}>
                 {this.props.categories!.length === 0 ? <Loader/> : this.renderList()}

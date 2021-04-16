@@ -25,7 +25,6 @@ class ProductsPage extends Component<IProductsPage> {
         })
     }
     render() {        
-        console.log(`products`, this.props.products) 
           return (
             <React.Fragment>
                 <Grid container spacing={2}>
