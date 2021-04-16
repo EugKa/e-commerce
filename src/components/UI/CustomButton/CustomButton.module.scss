@@ -1,0 +1,38 @@
+.CustomButton {
+  margin-top: 18px;
+  padding: 10px 20px;
+  outline: none;
+  cursor: pointer;
+}
+
+.black {
+  border: 1px solid black;
+  color: #fff;
+  background-color: black;
+  &:hover {
+    background-color: #fff;
+    color: black;
+  }
+}
+
+.blue {
+  color: #fff;
+  border: 1px solid rgb(74, 74, 255);
+  background-color: rgb(74, 74, 255);
+  &:hover {
+    background-color: rgb(97, 97, 255);
+    color: #fff;
+  }
+}
+
+.black-invert {
+  border: 1px solid black;
+  background-color: #fff;
+  color: black;
+
+  &:hover {
+    color: #fff;
+    background-color: black;
+    border: none;
+  }
+}

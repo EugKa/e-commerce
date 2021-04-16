@@ -1,0 +1,19 @@
+.paper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 240px;
+  background-position: center;
+  background-size: cover;
+  overflow: hidden;
+}
+
+.link {
+  color: black;
+  text-decoration: none;
+  border: 1px solid black;
+  padding: 20px 30px;
+  background-color: #fff;
+  opacity: 0.7;
+  font-weight: bold;
+}

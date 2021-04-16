@@ -1,0 +1,14 @@
+.signin {
+  display: flex;
+  flex-direction: column;
+  width: 30vw;
+}
+.form {
+  display: flex;
+  flex-direction: column;
+}
+
+.btnGroup {
+  display: flex;
+  justify-content: space-between;
+}
