@@ -1,3 +1,4 @@
+import { Grid } from "@material-ui/core";
 import React from "react";
 import { connect } from "react-redux";
 import { addCartItem, cleateItemFromCart, removeCartItem } from "../../store/cart";
@@ -13,19 +14,19 @@ interface CheckoutItemProps {
 const CheckoutItem = ({cartItem, clearItem, addItem, removeItem}:CheckoutItemProps) => {
     const {name, image, price,quantity} = cartItem
     return (
-        <div className={styles.CheckoutItem}>
-        <div className={styles.ImageContainer}>
+        <Grid container className={styles.CheckoutItem}>
+        <Grid item xs={3} md={3} className={styles.ImageContainer}>
             <img src={image} alt="item"/>
-        </div>
-        <span className={styles.name}>{name}</span>
-        <span className={styles.quantity}>
+        </Grid>
+        <Grid item xs={3} md={3} className={styles.name}>{name}</Grid>
+        <Grid item xs={3} md={3} className={styles.quantity}>
             <div className={styles.arrow} onClick={()=> removeItem(cartItem)}>&#10094;</div>
             <span className={styles.value}>{quantity}</span> 
             <div className={styles.arrow}onClick={()=> addItem(cartItem)}>&#10095;</div>
-        </span>
-        <span className={styles.price}>{price}</span>
-        <div className={styles.RemoveButton} onClick={()=> clearItem(cartItem)}>&#10005;</div>
-    </div>
+        </Grid>
+        <Grid item xs={1} md={2} className={styles.price}>{price}</Grid>
+        <Grid item xs={2} md={1} className={styles.RemoveButton} onClick={()=> clearItem(cartItem)}>&#10005;</Grid>
+    </Grid>
     )
 }
 

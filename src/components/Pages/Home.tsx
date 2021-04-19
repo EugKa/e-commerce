@@ -20,7 +20,7 @@ class HomePage extends React.Component<HomePageProps> {
     renderList = () => {
         return <Grid container spacing={2} className={styles.MenuCategories}>
         {this.props.categories!.map(item => {
-            return <Grid className={styles.item}  key={item.id} item xs={item.size}>
+            return <Grid className={styles.item}  key={item.id} item xs={6} sm={item.size}>
             <Categories {...item}/>
             </Grid>
         })}

@@ -1,4 +1,5 @@
 export interface IProduct {
+    length: any;
     category: string;
     id: string;
     image: string;

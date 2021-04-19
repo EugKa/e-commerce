@@ -8,18 +8,12 @@
   align-items: center;
 
   .ImageContainer {
-    width: 23%;
     padding-right: 15px;
 
     img {
       width: 100%;
       height: 100%;
     }
-  }
-  .name,
-  .quantity,
-  .price {
-    width: 23%;
   }
 
   .quantity {
@@ -32,8 +26,18 @@
     }
   }
 
+  .price {
+  }
+
   .RemoveButton {
-    padding-left: 12px;
+    padding-right: 5px;
+    text-align: end;
     cursor: pointer;
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .CheckoutItem {
+    font-size: 16px;
   }
 }

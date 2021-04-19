@@ -29,7 +29,7 @@ const Header = ({currentUser, hidden}:HeaderProps):JSX.Element => {
               </h2>
             </div>
             : <Link className={styles.link} to={ROUTES_URLS.SING_IN}>
-                <h2>Login</h2>
+                <h2>LOGIN</h2>
               </Link>
           }
           <CartIcon/>

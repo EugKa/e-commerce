@@ -7,6 +7,7 @@ import { getDataProducts, getProductsSelector } from '../../store/products';
 import { Product } from '../Product';
 import { Loader } from '../UI/Loader';
 import { ProductCollection } from '../../types'
+import styles from './ProductsPage.module.scss'
 interface IProductsPage extends RouteChildrenProps<{ id: string }>{
     products?: ProductCollection;
     getProducts: () => void
@@ -26,12 +27,13 @@ class ProductsPage extends Component<IProductsPage> {
     }
     render() {        
           return (
-            <React.Fragment>
-                <Grid container spacing={2}>
-                {this.props.products!.length === 0 ? <Loader/> : this.renderList()}
-                </Grid>
-            </React.Fragment>
-            
+            <div className={styles.ProductPage}>
+                <div className={styles.wrapper}>
+                    <Grid container spacing={2}>
+                    {this.props.products!.length === 0 ? <Loader/> : this.renderList()}
+                    </Grid>
+                </div>
+            </div>          
         )
     }
 }

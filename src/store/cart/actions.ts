@@ -1,4 +1,4 @@
-import { IProduct } from "../../types";
+import { IProduct, ProductCollection } from "../../types";
 import { ACTIONS_TYPE } from "./types";
 
 export const toggleCartHidden = () => ({
@@ -18,4 +18,9 @@ export const cleateItemFromCart = (item:IProduct) => ({
 export const removeCartItem = (item:IProduct) => ({
     type: ACTIONS_TYPE.REMOVE_ITEM,
     payload: item
+})
+
+export const removeAllCartItems = (items:ProductCollection) => ({
+    type: ACTIONS_TYPE.REMOVE_ALL_ITEMS,
+    payload: items
 })

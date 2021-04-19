@@ -1,5 +1,5 @@
 import { RouteChildrenProps } from "react-router";
-import {  Checkout, HomePage, NotFound, ProductsPage, SignInAndSignUp } from "../Pages";
+import {  Checkout, HomePage, NotFound, ProductsPage, SignInAndSignUp, Payment } from "../Pages";
 
 
 export enum ROUTES_URLS {
@@ -7,6 +7,7 @@ export enum ROUTES_URLS {
     PRODUCT = '/product',
     SING_IN = '/login',
     CHECKOUT = '/checkout',
+    PAYMENT = '/payment',
     NOT_FOUND = '/404',
 }
  
@@ -43,7 +44,11 @@ export const routes: Array<AppRoute> = [
         isHidden: true,
 
     },
-   
+    {
+        path: ROUTES_URLS.PAYMENT,
+        render: () => <Payment/>,
+        title: 'payment', 
+    },
     {
         path: ROUTES_URLS.NOT_FOUND,
         render: (props: RouteChildrenProps) => <NotFound {...props}/>,

@@ -4,21 +4,14 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin: 50px auto 0;
+  margin: 50px auto;
 
   .CheckoutHeader {
-    width: 100%;
-    padding: 10px 0;
-    display: flex;
-    justify-content: space-between;
     border-bottom: 1px solid darkgrey;
 
     .HeaderBlock {
-      text-transform: capitalize;
-      width: 23%;
-
       &:last-child {
-        width: 8%;
+        text-align: end;
       }
     }
   }
@@ -34,5 +27,25 @@
     margin-top: 40px;
     font-size: 24px;
     color: red;
+  }
+  .PayLink {
+    padding: 5px 60px;
+    background-color: green;
+    text-decoration: none;
+    border-radius: 5px;
+    color: #fff;
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .HeaderBlock {
+    width: 20%;
+
+    &:last-child {
+      width: 10%;
+    }
+  }
+  .CheckoutPage {
+    width: 100%;
   }
 }
