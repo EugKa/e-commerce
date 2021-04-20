@@ -4,6 +4,7 @@ interface ICustomButton {
     type: string
     onClick?: (e:React.MouseEvent) => void;
     children:React.ReactNode
+    disabled?: any
 }
 
 export const CustomButton = (props:ICustomButton) => {
@@ -13,6 +14,7 @@ export const CustomButton = (props:ICustomButton) => {
     ]
     return (
         <button 
+            disabled={props.disabled}
             onClick={props.onClick}
             className={cls.join(' ')}
         >

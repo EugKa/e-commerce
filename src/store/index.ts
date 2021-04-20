@@ -1,10 +1,11 @@
 import { combineReducers, compose, createStore, applyMiddleware } from 'redux';
 import { persistStore, persistReducer } from 'redux-persist'
 import storage from 'redux-persist/lib/storage'
-import categories, { categoriesMiddleware, CategoriesState } from './categories';
-import products, { productsMiddleware, ProductsState } from './products';
-import user, {userState, userMiddleware} from './auth';
+import categories, { CategoriesState } from './categories';
+import products, { ProductsState } from './products';
+import user, {userState} from './auth';
 import cart, {CartState} from './cart'
+import thunk from 'redux-thunk';
 
 export interface  AppState {
   categories: CategoriesState;
@@ -35,10 +36,10 @@ const rootReducer = combineReducers<AppState>({
 export const store = createStore(
   persistReducer(persistConfig, rootReducer),
   undefined,
-  composeEnhancers(applyMiddleware(
-      ...categoriesMiddleware,
-      ...productsMiddleware,
-      ...userMiddleware
+  composeEnhancers(applyMiddleware(thunk
+      // ...categoriesMiddleware,
+      // ...productsMiddleware,
+      // ...userMiddleware
 
     ))
 )

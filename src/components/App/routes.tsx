@@ -1,6 +1,15 @@
 import { RouteChildrenProps } from "react-router";
-import {  Checkout, HomePage, NotFound, ProductsPage, SignInAndSignUp, Payment } from "../Pages";
+import {  
+    Checkout,
+    HomePage, 
+    NotFound, 
+    ProductsPage, 
+    SignInAndSignUp, 
+    Payment 
+} from "../Pages";
 
+
+// const HomePageWithLoding = withLoading
 
 export enum ROUTES_URLS {
     HOME = '/',
@@ -12,17 +21,18 @@ export enum ROUTES_URLS {
 }
  
 export interface AppRoute {
-    path: ROUTES_URLS,
-    render: (props: any) => any,
-    title?: string,
-    exact?: boolean
-    isHidden?: boolean
+    path: ROUTES_URLS;
+    render: (props: any) => any;
+    title?: string;
+    exact?: boolean;
+    isHidden?: boolean;
+    isProtected?: boolean;
 }
 
 export const routes: Array<AppRoute> = [
     {
         path: ROUTES_URLS.HOME,
-        render: () => <HomePage/>,
+        render: (props:any) => <HomePage {...props}/>,
         title: 'Home',
         exact: true
 
@@ -36,6 +46,7 @@ export const routes: Array<AppRoute> = [
         path: ROUTES_URLS.CHECKOUT,
         render: () => <Checkout/>,
         title: 'checkout',
+        isProtected: true
     }, 
     {
         path: `${ROUTES_URLS.PRODUCT}/:id` as any,

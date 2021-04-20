@@ -3,7 +3,7 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux';
 import { RouteChildrenProps } from 'react-router';
 import { AppState } from '../../store';
-import { getDataProducts, getProductsSelector } from '../../store/products';
+import { fetchProducts, getProductsSelector, ProductsLoadingSelector } from '../../store/products';
 import { Product } from '../Product';
 import { Loader } from '../UI/Loader';
 import { ProductCollection } from '../../types'
@@ -11,6 +11,7 @@ import styles from './ProductsPage.module.scss'
 interface IProductsPage extends RouteChildrenProps<{ id: string }>{
     products?: ProductCollection;
     getProducts: () => void
+    loading: boolean
 }
 
 class ProductsPage extends Component<IProductsPage> {
@@ -19,20 +20,19 @@ class ProductsPage extends Component<IProductsPage> {
     }
 
     renderList = () => {
-        return this.props.products!
+        return <Grid container spacing={2}>
+            { this.props.products!
         .filter((item) => item.listId === this.props.match?.params.id)
         .map(item => {
             return <Product key={item.id} item={item}/>
-        })
+        })}
+        </Grid>
+        
     }
     render() {        
           return (
             <div className={styles.ProductPage}>
-                <div className={styles.wrapper}>
-                    <Grid container spacing={2}>
-                    {this.props.products!.length === 0 ? <Loader/> : this.renderList()}
-                    </Grid>
-                </div>
+                    {this.props.loading? <Loader/> : this.renderList()}
             </div>          
         )
     }
@@ -40,13 +40,14 @@ class ProductsPage extends Component<IProductsPage> {
 
 const mapStateToProps = (state:AppState) => {
     return {
-        products: getProductsSelector(state)
+        products: getProductsSelector(state),
+        loading: ProductsLoadingSelector(state)
     }
 }
 
 const mapDispatchToProps = (dispatch:any) => {
     return {
-        getProducts: () => dispatch(getDataProducts())
+        getProducts: () => dispatch(fetchProducts())
     }
 }
 

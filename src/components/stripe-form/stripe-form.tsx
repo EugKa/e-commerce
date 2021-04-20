@@ -108,9 +108,6 @@ const StripeForm = ({total, onRemoveAllItems, cartItems}:StripeFormProps) => {
     event.preventDefault();
 
     if (!stripe || !elements) {
-      console.log('1');
-      console.log('2');
-          
       // Stripe.js has not loaded yet. Make sure to disable
       // form submission until Stripe.js has loaded.
       return;

@@ -3,14 +3,14 @@ import Grid from '@material-ui/core/Grid';
 import { Categories } from '../Categories';
 
 import styles from './Home.module.scss'
-import { AppState, getCategoriesSelector, getDataCategories } from '../../store';
+import { AppState, getCategoriesSelector, fetchCategories, CategoriesLoadingSelector } from '../../store';
 import { connect } from 'react-redux';
 import { Loader } from '../UI/Loader';
 import { CategorieCollection } from '../../types';
-
 interface HomePageProps {
     categories?: CategorieCollection;
     getCategories: () => void
+    loading: boolean
 }
 class HomePage extends React.Component<HomePageProps> {
     
@@ -30,7 +30,7 @@ class HomePage extends React.Component<HomePageProps> {
     render() {
         return (
             <div className={styles.root}>
-                {this.props.categories!.length === 0 ? <Loader/> : this.renderList()}
+                {this.props.loading ? <Loader/> : this.renderList()}
             </div>
             
         )
@@ -39,13 +39,14 @@ class HomePage extends React.Component<HomePageProps> {
 
 const mapStateToProps = (state:AppState) => {
     return {
-        categories: getCategoriesSelector(state)
+        categories: getCategoriesSelector(state),
+        loading: CategoriesLoadingSelector(state)
     }
 }
 
 const mapDispatchToProps = (dispatch:any) => {
     return {
-        getCategories: () => dispatch(getDataCategories())
+        getCategories: () => dispatch(fetchCategories())
     }
 }
 

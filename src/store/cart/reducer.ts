@@ -8,7 +8,7 @@ export interface CartState {
 
 const INITIAL_STATE = {
     hidden: true,
-    cartItems: []
+    cartItems: [],
 }
 
 const cartReducer = (state: CartState = INITIAL_STATE, {type,payload}:any) => {
@@ -21,7 +21,7 @@ const cartReducer = (state: CartState = INITIAL_STATE, {type,payload}:any) => {
         case ACTIONS_TYPE.ADD_CART_ITEM:
             return {
                 ...state,
-                cartItems: addItemToCart(state.cartItems, payload)
+                cartItems: addItemToCart(state.cartItems, payload),
             }    
         case ACTIONS_TYPE.CLEAR_ITEM_FROM_CART:
             return {
@@ -40,7 +40,7 @@ const cartReducer = (state: CartState = INITIAL_STATE, {type,payload}:any) => {
                 ...state,
                 cartItems: state.cartItems.filter(
                     items => items.length !== payload.length
-                ) 
+                ),
             }    
         default:
             return state;

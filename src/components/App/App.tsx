@@ -4,8 +4,9 @@ import { Header } from '../Header';
 import './base.scss'
 import { AppRoute, routes, ROUTES_URLS } from './routes';
 import styles from './App.module.scss'
-import { readUser } from '../../store/auth';
+import { fetchUser } from '../../store/auth';
 import { connect } from 'react-redux';
+import { ProtectedRoute } from '../protected-route';
 interface AppProps {
   onReadUser: () => void
 }
@@ -18,11 +19,20 @@ class App extends React.Component<AppProps> {
    
   }
   renderRoute = (route:AppRoute, i: number) => {
-    return <Route exact={route.exact} 
-                  key={i} 
-                  path={route.path} 
-                  render={(props) => route.render({...props})}
-            />
+    if(route.isProtected) {
+      return <ProtectedRoute
+              exact={route.exact}
+              key={i}
+              path={route.path}
+              render={route.render}/>
+    } else {
+      return <Route 
+              exact={route.exact} 
+              key={i} 
+              path={route.path} 
+              render={(props) => route.render({...props})}/>
+    }
+    
   }
   render() {    
     return (
@@ -41,7 +51,7 @@ class App extends React.Component<AppProps> {
 }
 
 const mapDispatchToProps = (dispatch:any) => ({
-  onReadUser: () => dispatch(readUser())
+  onReadUser: () => dispatch(fetchUser())
 });
 
 

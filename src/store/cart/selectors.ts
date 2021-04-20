@@ -13,6 +13,7 @@ export const selectCartItems = createSelector(
     cart => cart.cartItems
 )
 
+
 export const selectCartItemsCount = createSelector(
     [selectCartItems],
     cartItems => 
