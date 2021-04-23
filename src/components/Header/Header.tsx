@@ -1,7 +1,6 @@
 import { Link } from 'react-router-dom'
 import { ROUTES_URLS } from '../App/routes';
 import styles from "./Header.module.scss";
-import {auth} from '../../firebase'
 import { connect } from 'react-redux';
 import { CartIcon } from '../cart-icon'
 import { CartDropdown } from '../cart-dropdown';
@@ -9,12 +8,15 @@ import { AppState } from '../../store';
 import { selectCartHidden } from '../../store/cart/selectors';
 import { selectCurrentUser } from '../../store/auth/selectors';
 import { ICurrentUser } from '../../types/CurrentUser';
+import { Dispatch } from 'redux';
+import { signOutStart } from '../../store/auth';
 
 interface HeaderProps {
-  currentUser: ICurrentUser
-  hidden:boolean
+  currentUser: ICurrentUser;
+  hidden:boolean;
+  signOutStart: () => void
 }
-const Header = ({currentUser, hidden}:HeaderProps):JSX.Element => {
+const Header = ({currentUser, hidden, signOutStart}:HeaderProps):JSX.Element => {
     return (
       <header className={styles.Header}>
         <div className={styles.wrapper}>
@@ -23,7 +25,7 @@ const Header = ({currentUser, hidden}:HeaderProps):JSX.Element => {
               </Link>
           {
             currentUser
-            ? <div className={styles.btn} onClick={()=> auth.signOut()}>
+            ? <div className={styles.btn} onClick={signOutStart}>
               <h2>
                 OUT
               </h2>
@@ -49,10 +51,11 @@ const mapStateToProps = (state:AppState) => ({
   currentUser: selectCurrentUser(state)
 });
 
+const mapDispatchToProps = (dispatch:Dispatch) => ({
+  signOutStart: () => dispatch(signOutStart())
+})
 
-
-
-const ConnectHeader = connect(mapStateToProps)(Header)
+const ConnectHeader = connect(mapStateToProps, mapDispatchToProps)(Header)
 
 export { ConnectHeader as Header}
 

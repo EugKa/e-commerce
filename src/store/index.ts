@@ -5,7 +5,8 @@ import categories, { CategoriesState } from './categories';
 import products, { ProductsState } from './products';
 import user, {userState} from './auth';
 import cart, {CartState} from './cart'
-import thunk from 'redux-thunk';
+import createSagaMiddleware from 'redux-saga'
+import { rootSaga } from './root-saga';
 
 export interface  AppState {
   categories: CategoriesState;
@@ -26,6 +27,10 @@ const persistConfig = {
   whitelist: ['cart']
 }
 
+const sagaMiddleware = createSagaMiddleware()
+
+const middlewares = [sagaMiddleware]
+
 const rootReducer = combineReducers<AppState>({
   categories,
   products,
@@ -36,13 +41,15 @@ const rootReducer = combineReducers<AppState>({
 export const store = createStore(
   persistReducer(persistConfig, rootReducer),
   undefined,
-  composeEnhancers(applyMiddleware(thunk
+  composeEnhancers(applyMiddleware(...middlewares
       // ...categoriesMiddleware,
       // ...productsMiddleware,
       // ...userMiddleware
 
     ))
 )
+
+sagaMiddleware.run(rootSaga)
 
 export const persistor = persistStore(store)
 

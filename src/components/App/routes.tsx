@@ -9,8 +9,6 @@ import {
 } from "../Pages";
 
 
-// const HomePageWithLoding = withLoading
-
 export enum ROUTES_URLS {
     HOME = '/',
     PRODUCT = '/product',
@@ -32,7 +30,7 @@ export interface AppRoute {
 export const routes: Array<AppRoute> = [
     {
         path: ROUTES_URLS.HOME,
-        render: (props:any) => <HomePage {...props}/>,
+        render: () => <HomePage/>,
         title: 'Home',
         exact: true
 
@@ -58,7 +56,8 @@ export const routes: Array<AppRoute> = [
     {
         path: ROUTES_URLS.PAYMENT,
         render: () => <Payment/>,
-        title: 'payment', 
+        title: 'payment',
+        isProtected: true 
     },
     {
         path: ROUTES_URLS.NOT_FOUND,

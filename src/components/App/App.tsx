@@ -4,19 +4,19 @@ import { Header } from '../Header';
 import './base.scss'
 import { AppRoute, routes, ROUTES_URLS } from './routes';
 import styles from './App.module.scss'
-import { fetchUser } from '../../store/auth';
 import { connect } from 'react-redux';
 import { ProtectedRoute } from '../protected-route';
+import { Dispatch } from 'redux';
+import { checkUserSession } from '../../store/auth';
 interface AppProps {
-  onReadUser: () => void
+  checkUserSession: () => void
 }
 
 
 class App extends React.Component<AppProps> {
   componentDidMount() {
-    const { onReadUser } = this.props;
-    onReadUser()
-   
+    const { checkUserSession } =this.props
+    checkUserSession()
   }
   renderRoute = (route:AppRoute, i: number) => {
     if(route.isProtected) {
@@ -50,8 +50,8 @@ class App extends React.Component<AppProps> {
   }
 }
 
-const mapDispatchToProps = (dispatch:any) => ({
-  onReadUser: () => dispatch(fetchUser())
+const mapDispatchToProps = (dispatch:Dispatch) => ({
+  checkUserSession: () => dispatch(checkUserSession())
 });
 
 

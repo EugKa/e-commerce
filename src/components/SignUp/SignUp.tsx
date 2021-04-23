@@ -1,9 +1,10 @@
 import React, { Component, FormEvent } from 'react'
+import { connect } from 'react-redux'
+import { Dispatch } from 'redux'
 import { CustomButton } from '../UI/CustomButton'
 import { CustomInput } from '../UI/CustomInput'
+import { signUpStart } from "../../store/auth";
 import styles from './SignUp.module.scss'
-import { auth } from '../../firebase'
-import { createUserProfileDocument } from '../../api';
 interface SignUpState {
     displayName?: string
     email?: string | number
@@ -11,7 +12,11 @@ interface SignUpState {
     confirmPassword?: string | number,
 }
 
-export class SignUp extends Component<SignUpState> {
+interface SignUpProps {
+    signUpStart: (userCredentials:any) => void 
+}
+
+class SignUp extends Component<SignUpProps,SignUpState> {
     state = {
         displayName: '',
         email: '',
@@ -21,26 +26,14 @@ export class SignUp extends Component<SignUpState> {
 
     handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault()
-        const {displayName, email, password, confirmPassword} = this.state
+        const { signUpStart } = this.props
+        const { displayName, email ,password, confirmPassword} = this.state
 
         if(password !== confirmPassword) {
             alert('password don`t match')
             return
         }
-
-        try {
-            const {user} = await auth.createUserWithEmailAndPassword(email, password)
-            await createUserProfileDocument(user, {displayName})
-        } catch (error) {
-            console.error(error)
-        }
-        
-        this.setState({
-            displayName: '',
-            email: '',
-            password: '',
-            confirmPassword: ''
-        })
+        signUpStart({displayName, email ,password})
     }
 
     handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -95,4 +88,17 @@ export class SignUp extends Component<SignUpState> {
         )
     }
 }
+
+// const mapStateToProps = (state) => ({
+    
+// })
+
+const mapDispatchToProps = (dispatch: Dispatch) => ({
+    signUpStart: (userCredentials:any) => dispatch(signUpStart(userCredentials))
+})
+
+const ConnectSignUp = connect(null, mapDispatchToProps)(SignUp)
+
+export { ConnectSignUp as SignUp }
+
 

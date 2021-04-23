@@ -3,7 +3,7 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux';
 import { RouteChildrenProps } from 'react-router';
 import { AppState } from '../../store';
-import { fetchProducts, getProductsSelector, ProductsLoadingSelector } from '../../store/products';
+import { fetchProductsStart, getProductsSelector, ProductsLoadingSelector } from '../../store/products';
 import { Product } from '../Product';
 import { Loader } from '../UI/Loader';
 import { ProductCollection } from '../../types'
@@ -47,7 +47,7 @@ const mapStateToProps = (state:AppState) => {
 
 const mapDispatchToProps = (dispatch:any) => {
     return {
-        getProducts: () => dispatch(fetchProducts())
+        getProducts: () => dispatch(fetchProductsStart())
     }
 }
 

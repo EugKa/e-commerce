@@ -3,7 +3,7 @@ import Grid from '@material-ui/core/Grid';
 import { Categories } from '../Categories';
 
 import styles from './Home.module.scss'
-import { AppState, getCategoriesSelector, fetchCategories, CategoriesLoadingSelector } from '../../store';
+import { AppState, getCategoriesSelector, fetchCategoriesStart, CategoriesLoadingSelector } from '../../store';
 import { connect } from 'react-redux';
 import { Loader } from '../UI/Loader';
 import { CategorieCollection } from '../../types';
@@ -19,15 +19,18 @@ class HomePage extends React.Component<HomePageProps> {
     }
     renderList = () => {
         return <Grid container spacing={2} className={styles.MenuCategories}>
-        {this.props.categories!.map(item => {
-            return <Grid className={styles.item}  key={item.id} item xs={6} sm={item.size}>
-            <Categories {...item}/>
-            </Grid>
-        })}
-    </Grid>
+            {this.props.categories!.map(item => {
+                return <Grid className={styles.item}  key={item.id} item xs={6} sm={item.size}>
+                <Categories {...item}/>
+                </Grid>
+            })}
+        </Grid>
     }
+
+    
     
     render() {
+        // console.log(`categories`,  this.props.categories)
         return (
             <div className={styles.root}>
                 {this.props.loading ? <Loader/> : this.renderList()}
@@ -46,7 +49,7 @@ const mapStateToProps = (state:AppState) => {
 
 const mapDispatchToProps = (dispatch:any) => {
     return {
-        getCategories: () => dispatch(fetchCategories())
+        getCategories: () => dispatch(fetchCategoriesStart())
     }
 }
 
